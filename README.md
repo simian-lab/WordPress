@@ -1,4 +1,5 @@
-woocommerce
+Wordpress For Simian tests
 =========
 
-For info about initial install, head to our wiki
+On this wordpress install, we will test everything we need and make experiments on wordpress.
+
