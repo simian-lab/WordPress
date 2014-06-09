@@ -47,7 +47,13 @@
 		</tr>
 		<tr>
 			<td><?php _e( 'MySQL Version','woocommerce' ); ?>:</td>
-			<td><?php if ( function_exists( 'mysql_get_server_info' ) ) echo esc_html( mysql_get_server_info() ); ?></td>
+			<td>
+				<?php
+				/** @global wpdb $wpdb */
+				global $wpdb;
+				echo $wpdb->db_version();
+				?>
+			</td>
 		</tr>
 		<tr>
 			<td><?php _e( 'WP Memory Limit','woocommerce' ); ?>:</td>
@@ -451,10 +457,12 @@
 			<?php
 
 				$template_paths = apply_filters( 'woocommerce_template_overrides_scan_paths', array( 'WooCommerce' => WC()->plugin_path() . '/templates/' ) );
+				$scanned_files  = array();
 				$found_files    = array();
 
-				foreach ( $template_paths as $plugin_name => $template_path )
+				foreach ( $template_paths as $plugin_name => $template_path ) {
 					$scanned_files[ $plugin_name ] = $this->scan_template_files( $template_path );
+				}
 
 				foreach ( $scanned_files as $plugin_name => $files ) {
 					foreach ( $files as $file ) {

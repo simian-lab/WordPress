@@ -82,7 +82,7 @@ function wc_get_template_part( $slug, $name = '' ) {
  * Get other templates (e.g. product attributes) passing attributes and including the file.
  *
  * @access public
- * @param mixed $template_name
+ * @param string $template_name
  * @param array $args (default: array())
  * @param string $template_path (default: '')
  * @param string $default_path (default: '')
@@ -117,7 +117,7 @@ function wc_get_template( $template_name, $args = array(), $template_path = '', 
  *		$default_path	/	$template_name
  *
  * @access public
- * @param mixed $template_name
+ * @param string $template_name
  * @param string $template_path (default: '')
  * @param string $default_path (default: '')
  * @return string
@@ -172,7 +172,7 @@ function get_woocommerce_currencies() {
 				'CAD' => __( 'Canadian Dollars', 'woocommerce' ),
 				'CLP' => __( 'Chilean Peso', 'woocommerce' ),
 				'CNY' => __( 'Chinese Yuan', 'woocommerce' ),
-				'COP' => __( 'Colombian Peso', 'woocommerce' ),				
+				'COP' => __( 'Colombian Peso', 'woocommerce' ),
 				'CZK' => __( 'Czech Koruna', 'woocommerce' ),
 				'DKK' => __( 'Danish Krone', 'woocommerce' ),
 				'EUR' => __( 'Euros', 'woocommerce' ),
@@ -259,7 +259,7 @@ function get_woocommerce_currency_symbol( $currency = '' ) {
 		case 'ZAR' : $currency_symbol = '&#82;'; break;
 		case 'CZK' : $currency_symbol = '&#75;&#269;'; break;
 		case 'MYR' : $currency_symbol = '&#82;&#77;'; break;
-		case 'DKK' : $currency_symbol = '&#107;&#114;'; break;
+		case 'DKK' : $currency_symbol = 'kr.'; break;
 		case 'HUF' : $currency_symbol = '&#70;&#116;'; break;
 		case 'IDR' : $currency_symbol = 'Rp'; break;
 		case 'INR' : $currency_symbol = 'Rs.'; break;
@@ -385,7 +385,7 @@ function wc_setcookie( $name, $value, $expire = 0, $secure = false ) {
  */
 function get_woocommerce_api_url( $path ) {
 
-	$url = get_home_url( null, 'wc-api/v' . WC_API::VERSION . '/', ( 'yes' === get_option( 'woocommerce_force_ssl_checkout' ) ) ? 'https' : 'http' );
+	$url = get_home_url( null, 'wc-api/v' . WC_API::VERSION . '/', is_ssl() ? 'https' : 'http' );
 
 	if ( ! empty( $path ) && is_string( $path ) ) {
 		$url .= ltrim( $path, '/' );
