@@ -33,10 +33,16 @@ $featured_areas = $featurlicious->sm_read_areas();
 				<?php submit_button(__( 'Create area', 'featurlicious' ), 'primary', 'create-area'); ?>
 			</form>
 
-			<?php if(!empty($_POST)){
-				$area_name = $_POST['area-name'];
-				$area_description = $_POST['area-description'];
-				$featurlicious->sm_create_area($area_name, $area_description);
+			<?php if(isset($_POST)){
+				if(isset($_POST['area-name'])) {
+					$area_name = $_POST['area-name'];
+
+					if(isset($_POST['area-description'])) {
+						$area_description = $_POST['area-description'];
+					}
+
+					$featurlicious->sm_create_area($area_name, $area_description);
+				}
 			}
 			?>
 
