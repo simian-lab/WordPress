@@ -452,7 +452,7 @@ class Featurlicious {
 
 		$posts = array();
 
-		if(!empty($posts_ids)) {
+		if($posts_ids) {
 			
 			foreach($posts_ids as $id) {
 				$post = get_post( $id );

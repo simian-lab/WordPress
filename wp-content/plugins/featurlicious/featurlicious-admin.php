@@ -33,7 +33,7 @@ $featured_areas = $featurlicious->sm_read_areas();
 				<?php submit_button(__( 'Create area', 'featurlicious' ), 'primary', 'create-area'); ?>
 			</form>
 
-			<?php if(!empty($_POST)){
+			<?php if($_POST){
 				$area_name = $_POST['area-name'];
 				$area_description = $_POST['area-description'];
 				$featurlicious->sm_create_area($area_name, $area_description);
@@ -50,7 +50,7 @@ $featured_areas = $featurlicious->sm_read_areas();
 			while($featured_areas->have_posts()) {
 				$featured_areas->the_post();
 				$post_id = get_the_ID();
-				if(!empty(get_the_title())) {
+				if(get_the_title()) {
 					?>
 					<div class="postbox" id="<?php echo $post_id ?>">
 						<h3><?php the_title() ?></h3>
@@ -58,7 +58,7 @@ $featured_areas = $featurlicious->sm_read_areas();
 						<div class="posts-of-area">
 							<ul>
 								<?php $posts = get_post_meta($post_id, 'sim_posts', true);
-								if(!empty($posts)) {
+								if($posts) {
 									foreach($posts as $post) {
 										$post_id = $post[0];
 										$post_title = $post[1];
